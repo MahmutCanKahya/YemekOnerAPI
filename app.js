@@ -1,3 +1,4 @@
+'use strict'
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
@@ -14,9 +15,14 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
 app.use(PATH + "account", auth)
 app.use(PATH + "restaurant", restaurant)
+
+app.use("/",(req,res,next)=>{
+    res.json({
+        status:"Okey"
+    })
+});
 /*
 app.use('/api/v1/', (req, res, next) => {
     next(require('./api/routes/index'));
