@@ -1,34 +1,33 @@
 'use strict'
-const express = require('express');
-const app = express();
-const morgan = require('morgan');
-const bodyParser = require('body-parser')
+import express from 'express';
+import morgan from 'morgan';
+import { urlencoded, json } from 'body-parser';
 
-const auth = require('./api/routes/user')
-const restaurant = require('./api/routes/restaurant')
+import auth from './routes/user';
+import restaurant from './routes/restaurant';
 
 const PATH = "/api/v1/"
 
-const GenericResponseModel = require('./GenericResponseModel')
+require("./database/database")
 
+const app = express();
+//middleware
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(urlencoded({ extended: false }));
+app.use(json());
 
+//router
 app.use(PATH + "account", auth)
 app.use(PATH + "restaurant", restaurant)
+
 
 app.use("/",(req,res,next)=>{
     res.json({
         status:"Okey"
     })
 });
-/*
-app.use('/api/v1/', (req, res, next) => {
-    next(require('./api/routes/index'));
-});*/
-// for cors policy
 
+// for cors policy
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers'
@@ -56,4 +55,4 @@ app.use((error, req, res, next) => {
     res.status(error.status || 500).json({ data: loGenericResponseModel })
 });
 
-module.exports = app;
+export default app;

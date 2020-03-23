@@ -1,4 +1,4 @@
-const knex = require('./conenction')
+const knex = require('./conenction').default
 
 const Restaurant = {
     getAll: () => {

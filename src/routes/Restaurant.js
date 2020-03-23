@@ -1,15 +1,12 @@
-const Restaurant = require('../db/restaurant');
-const express = require('express');
-const router = express.Router();
-const checkAuth = require('../middleware/check-auth')
-const { RestaurantModel } = require('../models/RestaurantModel')
-const GenericResponseModel = require('../../GenericResponseModel');
-const { v4 } = require('uuid');
+import { getAll, create } from '../database/restaurant';
+import { Router } from 'express';
+const router = Router();
+import checkAuth from '../middleware/check-auth';
+import { v4 } from 'uuid';
 
 router.get('/', checkAuth, (req, res) => {
-    var loGenericResponseModel = new GenericResponseModel();
-    var loRestaurantModel = RestaurantModel;
-    Restaurant.getAll().then(restaurants => {
+    var loGenericResponseModel ;
+    getAll().then(restaurants => {
         if (restaurants) {
             loGenericResponseModel.status = "Ok"
             loGenericResponseModel.code = 200;
@@ -27,7 +24,7 @@ router.get('/', checkAuth, (req, res) => {
 })
 
 router.post('/', checkAuth, (req, res) => {
-    var loGenericResponseModel = new GenericResponseModel();
+    var loGenericResponseModel;
     var createRestaurant =
     {
         ...req.body,
@@ -35,7 +32,7 @@ router.post('/', checkAuth, (req, res) => {
     }
     console.log(createRestaurant)
 
-    Restaurant.create(createRestaurant).then(createdRestaurant => {
+    create(createRestaurant).then(createdRestaurant => {
         if (createdRestaurant) {
             loGenericResponseModel.status = "Ok"
             loGenericResponseModel.code = 200;
@@ -59,4 +56,4 @@ router.post('/', checkAuth, (req, res) => {
 
 
 
-module.exports = router
+export default router

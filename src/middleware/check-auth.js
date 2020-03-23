@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken')
-const GenericResponseModel = require('../../GenericResponseModel');
 module.exports = (req, res, next) => {
-    const loResponseModel = GenericResponseModel;
+    let loResponseModel;
     try {
         const token = req.headers.authorization.split(" ")[1];
 
