@@ -8,8 +8,8 @@ import Menu from "../models/Menu";
 
 router.get("/", async (req, res) => {
   var loGenericResponseModel;
-  Restaurant.hasMany(Menu, { as: "menu", foreignKey: "id" });
-  Menu.belongsTo(Restaurant, { as: "restaurant", foreignKey: "id" });
+  Menu.hasMany(Restaurant, { as: "restaurant", foreignKey: "menu_id" });
+  Restaurant.belongsTo(Menu, { as: "menu", foreignKey: "menu_id" });
 
   const a = await Restaurant.findAll({
     include: [{ model: Menu, as: "menu" }]
@@ -18,20 +18,6 @@ router.get("/", async (req, res) => {
   res.json({
     data: a
   });
-  /*getAll().then(restaurants => {
-        if (restaurants) {
-            loGenericResponseModel.status = "Ok"
-            loGenericResponseModel.code = 200;
-            loGenericResponseModel.data = restaurants
-        } else {
-            loGenericResponseModel.status = "Empty"
-            loGenericResponseModel.code = 200;
-            loGenericResponseModel.message = "Restaurant is a Empty"
-        }
-        res.json({
-            data: loGenericResponseModel
-        })
-    });*/
 });
 
 router.post("/", checkAuth, (req, res) => {
@@ -41,21 +27,7 @@ router.post("/", checkAuth, (req, res) => {
     row_guid: v4()
   };
   console.log(createRestaurant);
-
-  create(createRestaurant).then(createdRestaurant => {
-    if (createdRestaurant) {
-      loGenericResponseModel.status = "Ok";
-      loGenericResponseModel.code = 200;
-      loGenericResponseModel.data = createdRestaurant;
-    } else {
-      loGenericResponseModel.status = "Not Created";
-      loGenericResponseModel.code = 404;
-      loGenericResponseModel.message = "Restaurant not create";
-    }
-    res.json({
-      data: loGenericResponseModel
-    });
-  });
+  Restaurant.create()
 });
 
 export default router;
