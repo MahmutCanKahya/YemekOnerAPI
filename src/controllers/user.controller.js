@@ -2,14 +2,18 @@ import { hash as _hash, compareSync } from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 import { isValidEmailAndPassword, generateToken } from "../helper";
 import User from "../models/User";
+import { getAllUsers, getUserById } from "../database/getData";
+
 
 export async function getUsers(req, res) {
-  const users = await User.findAll();
+  const getUsers = await getAllUsers();
   res.json({
-    data: users
+    status: "Ok",
+    code: "200",
+    message: "",
+    data: getUsers
   });
 }
-
 export async function signUpUser(req, res) {
   const { email, password, username, name, surname } = req.body;
   try {
@@ -38,13 +42,16 @@ export async function signUpUser(req, res) {
     );
     if (newUser) {
       return res.status(201).json({
+        status: "Ok",
+        code: 201,
+        message: "User create success !",
         data: newUser
       });
     }
   } catch (e) {
     console.log(e);
     res.status(500).json({
-      message: "Bir şeyler yanlış gitti."
+      message: "error: " + e
     });
   }
 
@@ -66,8 +73,12 @@ export async function updateUser(req, res) {
       where: { id }
     }
   );
+  const user = await getUserById(id);
   return res.json({
-    data: affectedRows
+    status: "Ok",
+    code: "200",
+    message: "",
+    data: user
   });
 }
 export async function validateUser(req, res) {
@@ -86,7 +97,12 @@ export async function validateUser(req, res) {
               ...user.dataValues,
               token
             };
-            res.json(data);
+            res.json({
+              status:"Ok",
+              code:"200",
+              message:"",
+              data,
+            });
           } else {
             res.send("Kullanıcı bilgileri hatalı.");
           }

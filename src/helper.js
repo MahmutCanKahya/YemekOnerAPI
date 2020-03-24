@@ -33,3 +33,9 @@ export function getUserIdFromToken() {
   const decoded = jwt.verify(token, "secret");
   return decoded.id;
 }
+
+export function getUserRowGuidFromToken() {
+  const token = req.headers.authorization.split(" ")[1];
+  const decoded = jwt.verify(token, "secret");
+  return decoded.row_guid;
+}

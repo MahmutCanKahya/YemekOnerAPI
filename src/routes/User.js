@@ -11,7 +11,7 @@ import {
 router.get("/", getUsers);
 router.put("/:id", updateUser);
 
-router.post("/signup", signUpUser);
+router.post("/", signUpUser);
 router.post("/validate", validateUser);
 
 export default router;
