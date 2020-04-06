@@ -5,6 +5,7 @@ import checkAuth from "../middleware/check-auth";
 import { v4 } from "uuid";
 import Restaurant from "../models/Restaurant";
 import Menu from "../models/Menu";
+import Ratings from "../models/Ratings";
 
 router.get("/", async (req, res) => {
   var loGenericResponseModel;
@@ -14,6 +15,16 @@ router.get("/", async (req, res) => {
   const a = await Restaurant.findAll({
     include: [{ model: Menu, as: "menu" }]
   });
+
+  res.json({
+    data: a
+  });
+});
+
+router.get("/ratings", async (req, res) => {
+  var loGenericResponseModel;
+
+  const a = await Ratings.findAll();
 
   res.json({
     data: a

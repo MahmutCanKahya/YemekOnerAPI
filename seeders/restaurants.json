@@ -1,0 +1,54 @@
+[
+  {
+    id: 1,
+    restaurant_name: "Abacus Tavuk"
+  },
+  {
+    id: 2,
+    restaurant_name: "Adana Sofrası"
+  },
+  {
+    id: 3,
+    restaurant_name: "Breadli"
+  },
+  {
+    id: 4,
+    restaurant_name: "Burger King"
+  },
+  {
+    id: 5,
+    restaurant_name: "Çapa Balık"
+  },
+  {
+    id: 6,
+    restaurant_name: "İsos Döner"
+  },
+  {
+    id: 7,
+    restaurant_name: "Kaşık Kaşık Ev Yemekler"
+  },
+  {
+    id: 8,
+    restaurant_name: "Komagene"
+  },
+  {
+    id: 9,
+    restaurant_name: "Little Ceasars"
+  },
+  {
+    id: 10,
+    restaurant_name: "McDonald's"
+  },
+  {
+    id: 11,
+    restaurant_name: "1991 Tarihi Ortaköy Kumpircisi"
+  },
+  {
+    id: 12,
+    restaurant_name: "Tarihi Sürmene Pilavcısı"
+  },
+  {
+    id: 13,
+    restaurant_name: "Tang Chinese Food & Sushi"
+  }
+]

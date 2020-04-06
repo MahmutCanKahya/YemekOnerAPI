@@ -3,8 +3,8 @@ import express from 'express';
 import morgan from 'morgan';
 import { urlencoded, json } from 'body-parser';
 
-import auth from './routes/user';
-import restaurant from './routes/restaurant';
+import auth from './routes/User';
+import restaurant from './routes/Restaurant';
 
 const PATH = "/api/v1/"
 
