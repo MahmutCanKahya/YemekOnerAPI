@@ -63,9 +63,4 @@ def make_recommendation(model_knn, data, user):
         string += i+" " 
     # print recommendations
     return string
-
-print(make_recommendation(model_knn,mat_meal_features,sys.argv[1]))
- 
-
-
-    
+print(make_recommendation(model_knn,mat_meal_features,df_meal_features.index.get_loc(sys.argv[1])))
