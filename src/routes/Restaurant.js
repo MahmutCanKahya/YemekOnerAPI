@@ -1,4 +1,3 @@
-import { getAll, create } from "../database/restaurant";
 import { Router } from "express";
 const router = Router();
 import checkAuth from "../middleware/check-auth";
@@ -13,11 +12,11 @@ router.get("/", async (req, res) => {
   Restaurant.belongsTo(Menu, { as: "menu", foreignKey: "menu_id" });
 
   const a = await Restaurant.findAll({
-    include: [{ model: Menu, as: "menu" }]
+    include: [{ model: Menu, as: "menu" }],
   });
 
   res.json({
-    data: a
+    data: a,
   });
 });
 
@@ -27,18 +26,30 @@ router.get("/ratings", async (req, res) => {
   const a = await Ratings.findAll();
 
   res.json({
-    data: a
+    data: a,
   });
 });
-
+router.post("/recommender", (req, res) => {
+  var path = "C:\\Python27\\python.exe";
+  const user_id = req.body.user_id;
+  var spawn = require("child_process").spawn;
+  var process = spawn(path, ["n.py", user_id]);
+  // Takes stdout data from script which executed
+  // with arguments and send this data to res object
+  process.stdout.on("data", function (data) {
+    console.log(data.toString());
+    res.send(data.toString());
+  });
+});
+/*
 router.post("/", checkAuth, (req, res) => {
   var loGenericResponseModel;
   var createRestaurant = {
     ...req.body,
-    row_guid: v4()
+    row_guid: v4(),
   };
   console.log(createRestaurant);
-  Restaurant.create()
-});
+  Restaurant.create();
+});*/
 
 export default router;

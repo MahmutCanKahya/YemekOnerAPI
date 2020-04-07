@@ -47,7 +47,7 @@ app.use((req, res, next) => {
 });
 
 app.use((error, req, res, next) => {
-    var loGenericResponseModel = new GenericResponseModel();
+    var loGenericResponseModel ={}
     
     loGenericResponseModel.code = error.status || 500;
     loGenericResponseModel.status = "Fail"
