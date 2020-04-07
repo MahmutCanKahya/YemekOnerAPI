@@ -29,15 +29,13 @@ router.get("/ratings", async (req, res) => {
     data: a,
   });
 });
-router.post("/recommender", (req, res) => {
-  var path = "C:\\Python27\\python.exe";
-  const user_id = req.body.user_id;
+router.get("/recommender", (req, res) => {
   var spawn = require("child_process").spawn;
-  var process = spawn(path, ["n.py", user_id]);
-  // Takes stdout data from script which executed
-  // with arguments and send this data to res object
+  var user_id = req.body.user_id;
+
+  var process = spawn("python", ["hello.py",user_id]);
+
   process.stdout.on("data", function (data) {
-    console.log(data.toString());
     res.send(data.toString());
   });
 });
