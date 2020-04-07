@@ -37,6 +37,7 @@ router.get("/recommender", (req, res) => {
 
   process.stdout.on("data", function (data) {
     let myData=data.toString().split(" ");
+    myData.pop(;)
     res.send(myData);
   });
 });
