@@ -64,7 +64,7 @@ def make_recommendation(model_knn, data, user):
     # print recommendations
     return array
 
-print(make_recommendation(model_knn,mat_meal_features,sys.arg[1]))
+print(make_recommendation(model_knn,mat_meal_features,5))
  
 
 
