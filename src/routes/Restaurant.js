@@ -36,7 +36,7 @@ router.get("/recommender", (req, res) => {
   var process = spawn("python", ["hello.py",user_id]);
 
   process.stdout.on("data", function (data) {
-    myData=data.toString().split(" ");
+    let myData=data.toString().split(" ");
     res.send(myData);
   });
 });
