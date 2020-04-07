@@ -21,17 +21,9 @@ df = pd.DataFrame(data['data'], columns= ['id','price','rating','meal_name','res
 #
 #count=df.groupby(['meal_name','restaurant_name'])['rating'].count()
 mean=df.groupby(['meal_name','restaurant_name'])['rating'].mean()
-#
-#
-#
-#
-#ratings = pd.DataFrame(mean)
-#
-#ratings['num of ratings'] = pd.DataFrame(count) 
 
-###
 df_meal_features = df.pivot_table(index ='user_id', 
-              columns ='meal_name', values ='rating').fillna(0) 
+              columns =['meal_name'], values ='rating').fillna(0) 
   
   
 mat_meal_features = csr_matrix(df_meal_features.values)
@@ -49,7 +41,7 @@ model_knn.fit(mat_meal_features)
 
 
 
-def make_recommendation(model_knn, data, user):
+def find_similar_user(model_knn, data, user):
     n_recommendations=5
     # fit
     model_knn.fit(data)
@@ -58,9 +50,26 @@ def make_recommendation(model_knn, data, user):
     #raw_recommends = \
     #    sorted(list(zip(df_meal_features.index[indices.squeeze().tolist()], distances.squeeze().tolist())), key=lambda x: x[1])[:0:-1]
     # get reverse mapper
-    string =""
+    arr =[]
     for i in df_meal_features.index[indices.squeeze().tolist()] :
-        string += i+" " 
+        arr.append(i)
     # print recommendations
-    return string
-print(make_recommendation(model_knn,mat_meal_features,df_meal_features.index.get_loc(sys.argv[1])))
+    arr.pop(0)
+    return arr
+
+
+def make_recommendation(users):
+    dp_user = df.pivot_table(index ='meal_name', 
+              columns ='user_id', values ='rating').fillna(0) 
+
+
+    recommend = dp_user[users[0]]
+    recommend = pd.merge(recommend,dp_user[users[1]],on=['meal_name'])
+    recommend = pd.merge(recommend, dp_user[users[2]], on=['meal_name'])
+
+    return recommend.mean(axis=1).sort_values(ascending = False).head(10)
+
+
+print(list(make_recommendation(find_similar_user(model_knn,mat_meal_features,df_meal_features.index.get_loc(sys.argv[1]))).index))
+
+#print(df.loc[df["user_id"]==array[0]])
