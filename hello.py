@@ -58,11 +58,11 @@ def make_recommendation(model_knn, data, user):
     #raw_recommends = \
     #    sorted(list(zip(df_meal_features.index[indices.squeeze().tolist()], distances.squeeze().tolist())), key=lambda x: x[1])[:0:-1]
     # get reverse mapper
-    array =[]
+    string =""
     for i in df_meal_features.index[indices.squeeze().tolist()] :
-        array.append(i)
+        string += i+" " 
     # print recommendations
-    return array
+    return string
 
 print(make_recommendation(model_knn,mat_meal_features,5))
  
