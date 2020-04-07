@@ -1,6 +1,5 @@
-
-import sys
 import pandas as pd 
+import sys
 import requests 
 from scipy.sparse import csr_matrix
 from sklearn.neighbors import NearestNeighbors
@@ -8,7 +7,7 @@ from pandas.io.json import json_normalize
   
 # api-endpoint 
 URL = "http://35.228.102.158:3000/api/v1/Restaurant/ratings"
-print(URL)
+  
 # location given here 
 # sending get request and saving the response as response object 
 r = requests.get(url = URL) 
@@ -56,15 +55,16 @@ def make_recommendation(model_knn, data, user):
     model_knn.fit(data)
     distances, indices = model_knn.kneighbors(data[user], n_neighbors=n_recommendations+1)
     
-    raw_recommends = \
-        sorted(list(zip(df_meal_features.index[indices.squeeze().tolist()], distances.squeeze().tolist())), key=lambda x: x[1])[:0:-1]
+    #raw_recommends = \
+    #    sorted(list(zip(df_meal_features.index[indices.squeeze().tolist()], distances.squeeze().tolist())), key=lambda x: x[1])[:0:-1]
     # get reverse mapper
-    
+    array =[]
+    for i in df_meal_features.index[indices.squeeze().tolist()] :
+        array.append(i)
     # print recommendations
-    return df_meal_features.index[indices.squeeze().tolist()]
+    return array
 
-
-print(make_recommendation(model_knn,mat_meal_features,5))
+print(make_recommendation(model_knn,mat_meal_features,sys.arg[1]))
  
 
 
