@@ -3,8 +3,7 @@
     "username": "admin",
     "password": "774516",
     "database": "yemekoner",
-    "host": "127.0.0.1",
-    "dialect": "postgres",
-    "operatorsAliases": false
+    "host": "35.228.102.158",
+    "dialect": "postgres"
   }
 }

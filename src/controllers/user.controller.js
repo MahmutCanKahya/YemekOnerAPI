@@ -15,7 +15,7 @@ export async function getUsers(req, res) {
   });
 }
 export async function signUpUser(req, res) {
-  const { email, password, username, name, surname } = req.body;
+  const { email, password, username, name, surname,birth_date,city } = req.body;
   try {
     const loPassword = await _hash(password, 10);
     let newUser = await User.create(
@@ -25,6 +25,8 @@ export async function signUpUser(req, res) {
         username,
         password: loPassword,
         email,
+        birth_date,
+        city,
         row_created_date: new Date(),
         row_guid: uuidv4()
       },
@@ -35,6 +37,8 @@ export async function signUpUser(req, res) {
           "username",
           "password",
           "email",
+          "birth_date",
+          "city",
           "row_created_date",
           "row_guid"
         ]

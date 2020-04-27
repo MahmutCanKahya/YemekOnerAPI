@@ -70,7 +70,7 @@ def make_recommendation(users):
 
     return recommend.mean(axis=1).sort_values(ascending = False).head(10)
 
-x=list(make_recommendation(find_similar_user(model_knn,mat_meal_features,df_meal_features.index.get_loc("-M1ZWxpZUJrgyFr45F4_"))).index)
+x=list(make_recommendation(find_similar_user(model_knn,mat_meal_features,df_meal_features.index.get_loc(sys.argv[1]))).index)
 
 y = json.dumps(x)
     

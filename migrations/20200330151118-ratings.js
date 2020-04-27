@@ -9,26 +9,14 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true
       },
-      count: {
-        type: Sequelize.INTEGER
-      },
-      image: {
+      user_id: {
         type: Sequelize.STRING
       },
-      price: {
-        type: Sequelize.STRING
+      meal_id: {
+        type: Sequelize.STRING,
       },
       rating: {
         type: Sequelize.INTEGER
-      },
-      meal_name: {
-        type: Sequelize.STRING,
-      },
-      restaurant_name: {
-        type: Sequelize.STRING
-      },
-      user_id: {
-        type: Sequelize.STRING
       }
     });
   },
