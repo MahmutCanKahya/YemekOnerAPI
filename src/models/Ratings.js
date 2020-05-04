@@ -10,15 +10,6 @@ const Ratings = sequelize.define(
         autoIncrement: true,
         primaryKey: true
       },
-      count: {
-        type: Sequelize.INTEGER
-      },
-      image: {
-        type: Sequelize.STRING
-      },
-      price: {
-        type: Sequelize.STRING
-      },
       rating: {
         type: Sequelize.INTEGER
       },
