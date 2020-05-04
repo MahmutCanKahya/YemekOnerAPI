@@ -13,11 +13,8 @@ const Ratings = sequelize.define(
       rating: {
         type: Sequelize.INTEGER
       },
-      meal_name: {
+      meal_id: {
         type: Sequelize.STRING,
-      },
-      restaurant_name: {
-        type: Sequelize.STRING
       },
       user_id: {
         type: Sequelize.STRING

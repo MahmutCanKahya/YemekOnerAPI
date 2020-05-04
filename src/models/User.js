@@ -1,52 +1,53 @@
 import Sequelize from "sequelize";
-import sequelize from "../database/database"
+import sequelize from "../database/database";
 
 const User = sequelize.define(
   "users",
   {
     id: {
       type: Sequelize.INTEGER,
-      primaryKey: true
+      primaryKey: true,
     },
     row_guid: {
-      type: Sequelize.UUIDV4
+      type: Sequelize.UUIDV4,
     },
     email: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     password: {
-      type: Sequelize.STRING
-    },
-    username: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     name: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     surname: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     city: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     is_deleted: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.BOOLEAN,
     },
     row_created_date: {
-      type: Sequelize.DATE
+      type: Sequelize.DATE,
     },
     row_updated_date: {
-      type: Sequelize.DATE
+      type: Sequelize.DATE,
     },
     birth_date: {
-      type: Sequelize.DATE
+      type: Sequelize.DATE,
     },
     role_type: {
-      type: Sequelize.DATE
-    }
+      type: Sequelize.DATE,
+    },
+    is_first_login: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: true,
+    },
   },
   {
-    timestamps: false
+    timestamps: false,
   }
 );
 
