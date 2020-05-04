@@ -39,3 +39,7 @@ export function getUserRowGuidFromToken() {
   const decoded = jwt.verify(token, "secret");
   return decoded.row_guid;
 }
+
+export function getFirstSuggest(){
+  
+}

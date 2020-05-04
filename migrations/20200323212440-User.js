@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -7,46 +7,50 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
       },
       row_guid: {
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
       },
       email: {
         type: Sequelize.STRING,
-        unique: true
+        unique: true,
       },
       password: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       surname: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       city: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       is_deleted: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
       },
       row_created_date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       row_updated_date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       birth_date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       role_type: {
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
+      is_first_login: {
+        type: Sequelize.BOOLEAN,
+        defaultValue:true
+      },
     });
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("users")
-  }
+    return queryInterface.dropTable("users");
+  },
 };
