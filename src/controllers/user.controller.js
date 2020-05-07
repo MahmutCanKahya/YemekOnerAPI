@@ -2,6 +2,7 @@ import { hash as _hash, compareSync } from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 import { isValidEmailAndPassword, generateToken } from "../helper";
 import User from "../models/User";
+import Meal from "../models/Meal";
 import { getAllUsers, getUserById } from "../database/getData";
 
 export async function getUsers(req, res) {
@@ -94,6 +95,7 @@ export async function updateUser(req, res) {
 }
 export async function validateUser(req, res) {
   const { email, password } = req.body;
+
   if (isValidEmailAndPassword(req.body)) {
     User.findOne({
       where: {
@@ -104,16 +106,33 @@ export async function validateUser(req, res) {
         if (user) {
           if (compareSync(password, user.password)) {
             const token = generateToken(user);
-            const data = {
+            let data = {
               ...user.dataValues,
               token,
             };
-            res.json({
-              status: "Ok",
-              code: "200",
-              message: "",
-              data,
-            });
+            if (data.is_first_login) { //eğer ilk giriş ise 10 tane yemek önerisi yapılacak
+              Meal.findAll({ offset: Math.random() * 96, limit: 10 }).then(
+                (meals) => {
+                  data={
+                    ...data,
+                    suggest_meals:meals
+                  }
+                  res.json({
+                    status: "Ok",
+                    code: "200",
+                    message: "",
+                    data,
+                  });
+                }
+              );
+            } else {
+              res.json({
+                status: "Ok",
+                code: "200",
+                message: "",
+                data,
+              });
+            }
           } else {
             res.json({
               status: "Error",

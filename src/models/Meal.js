@@ -1,23 +1,32 @@
 import Sequelize from "sequelize";
 import sequelize from "../database/database";
 
-const Menu = sequelize.define(
-  "menus",
+const Meal = sequelize.define(
+  "meals",
   {
     id: {
       type: Sequelize.INTEGER,
       allowNull: false,
       autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
     },
     meal_name: {
       type: Sequelize.STRING,
-      unique: true
-    }
+      unique: true,
+    },
+    price: {
+      type: Sequelize.INTEGER,
+    },
+    restaurant_id: {
+      type: Sequelize.INTEGER,
+    },
+    meal_image: {
+      type: Sequelize.STRING,
+    },
   },
   {
-    timestamps: false
+    timestamps: false,
   }
 );
 
-export default Menu;
+export default Meal;

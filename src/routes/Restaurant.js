@@ -1,7 +1,5 @@
 import { Router } from "express";
 const router = Router();
-import checkAuth from "../middleware/check-auth";
-import { v4 } from "uuid";
 import Restaurant from "../models/Restaurant";
 import Menu from "../models/Menu";
 import Ratings from "../models/Ratings";

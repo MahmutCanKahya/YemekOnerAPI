@@ -16,15 +16,15 @@ r = requests.get(url = URL)
 # extracting data in json format 
 data = r.json() 
 
-df = pd.DataFrame(data['data'], columns= ['id','price','rating','meal_name','restaurant_name','user_id'])
+df = pd.DataFrame(data['data'], columns= ['id','rating','meal_id','user_id'])
 
 
 #
-#count=df.groupby(['meal_name','restaurant_name'])['rating'].count()
-mean=df.groupby(['meal_name','restaurant_name'])['rating'].mean()
+#count=df.groupby(['meal_id','restaurant_name'])['rating'].count()
+mean=df.groupby(['meal_id'])['rating'].mean()
 
 df_meal_features = df.pivot_table(index ='user_id', 
-              columns =['meal_name'], values ='rating').fillna(0) 
+              columns =['meal_id'], values ='rating').fillna(0) 
   
   
 mat_meal_features = csr_matrix(df_meal_features.values)
@@ -60,13 +60,13 @@ def find_similar_user(model_knn, data, user):
 
 
 def make_recommendation(users):
-    dp_user = df.pivot_table(index ='meal_name', 
+    dp_user = df.pivot_table(index ='meal_id', 
               columns ='user_id', values ='rating').fillna(0) 
 
 
     recommend = dp_user[users[0]]
-    recommend = pd.merge(recommend,dp_user[users[1]],on=['meal_name'])
-    recommend = pd.merge(recommend, dp_user[users[2]], on=['meal_name'])
+    recommend = pd.merge(recommend,dp_user[users[1]],on=['meal_id'])
+    recommend = pd.merge(recommend, dp_user[users[2]], on=['meal_id'])
 
     return recommend.mean(axis=1).sort_values(ascending = False).head(10)
 

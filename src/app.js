@@ -5,6 +5,7 @@ import { urlencoded, json } from 'body-parser';
 
 import auth from './routes/User';
 import restaurant from './routes/Restaurant';
+import recommend from './routes/Recommend'
 
 const PATH = "/api/v1/"
 
@@ -19,13 +20,9 @@ app.use(json());
 //router
 app.use(PATH + "account", auth)
 app.use(PATH + "restaurant", restaurant)
+app.use(PATH + "recommend", recommend)
 
 
-app.use("/",(req,res,next)=>{
-    res.json({
-        status:"Okey"
-    })
-});
 
 // for cors policy
 app.use((req, res, next) => {
