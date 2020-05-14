@@ -1,5 +1,6 @@
 import Restaurant from "../models/Restaurant";
 import Meal from "../models/Meal";
+import Ratings from "../models/Ratings";
 
 Restaurant.hasMany(Meal, { as: "meals", foreignKey: "restaurant_id" });
 
@@ -24,7 +25,7 @@ export async function getRestaurantById(req, res) {
 }
 
 export async function getAllRating(req, res) {
-  console.log(req.userData);
+
   const a = await Ratings.findAll();
 
   res.json({
