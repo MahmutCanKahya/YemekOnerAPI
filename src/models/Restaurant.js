@@ -8,26 +8,28 @@ const Restaurant = sequelize.define(
       type: Sequelize.INTEGER,
       allowNull: false,
       autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
     },
     row_guid: {
-      type: Sequelize.UUID
+      type: Sequelize.UUID,
+    },
+    restaurant_image: {
+      type: Sequelize.STRING,
     },
     restaurant_name: {
       type: Sequelize.STRING,
-      unique: true
+      unique: true,
     },
     restaurant_description: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     menu_id: {
-      type: Sequelize.INTEGER
-    }
+      type: Sequelize.INTEGER,
+    },
   },
   {
-    timestamps: false
-  },
+    timestamps: false,
+  }
 );
-
 
 export default Restaurant;

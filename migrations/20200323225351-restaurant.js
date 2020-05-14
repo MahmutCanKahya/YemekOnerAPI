@@ -19,6 +19,9 @@ module.exports = {
       restaurant_description: {
         type: Sequelize.STRING
       },
+      restaurant_image: {
+        type: Sequelize.STRING
+      },
       menu_id: {
         type: Sequelize.INTEGER
       }

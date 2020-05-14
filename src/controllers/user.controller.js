@@ -130,9 +130,9 @@ export async function validateUser(req, res) {
               }).then((meals) => {
                 data = {
                   ...data,
-                  suggest_meals: meals
+                  suggest_meals: meals,
                 };
-            
+
                 res.json({
                   status: "Ok",
                   code: "200",
