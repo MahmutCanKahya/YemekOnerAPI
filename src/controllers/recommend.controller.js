@@ -1,5 +1,7 @@
 import Ratings from "../models/Ratings";
 import User from "../models/User";
+import Meal from "../models/Meal";
+import Restaurant from "../models/Restaurant";
 
 export async function saveRecommendation(req, res) {
   const { rates, user } = req.body;
@@ -39,17 +41,40 @@ export async function saveRecommendation(req, res) {
 }
 
 export async function recommendMeal(req, res) {
+  Meal.belongsTo(Restaurant, {
+    as: "restaurant",
+    foreignKey: "restaurant_id",
+  });
   var spawn = require("child_process").spawn;
   var user_id = req.body.user_id;
 
   var process = spawn("python", ["hello.py", user_id]);
   console.log(process);
-  process.stdout.on("data", function (data) {
-    let myData = data.toString();
-    console.log(data);
-    res.json({
-      data,
-      myData,
+  try {
+    process.stdout.on("data", function (data) {
+      let myData = data.toString();
+      console.log("mealid:", data);
+
+      Meal.findAll({
+        where: {
+          id: data.data,
+        },
+        include: [{ model: Restaurant, as: "restaurant" }],
+      }).then((meals) => {
+        res.json({
+          status: "Okey",
+          code: 200,
+          data: meals,
+          message: "",
+        });
+      });
     });
-  });
+  } catch (error) {
+    res.json({
+      status: "Fail",
+      code: -1,
+      data: null,
+      message: "",
+    });
+  }
 }

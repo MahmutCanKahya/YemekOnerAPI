@@ -25,7 +25,6 @@ export async function getRestaurantById(req, res) {
 }
 
 export async function getAllRating(req, res) {
-
   const a = await Ratings.findAll();
 
   res.json({
