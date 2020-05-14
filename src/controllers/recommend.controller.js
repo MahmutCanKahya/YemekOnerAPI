@@ -47,7 +47,7 @@ export async function recommendMeal(req, res) {
 
   process.stdout.on("data", function (data) {
     let myData = data.toString();
-
+    console.log(data)
     res.json({
       data,
       myData,

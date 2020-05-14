@@ -15,7 +15,7 @@ export async function getUsers(req, res) {
   const getUsers = await getAllUsers();
   res.json({
     status: "Ok",
-    code: "200",
+    code: 200,
     message: "",
     data: getUsers,
   });
@@ -94,7 +94,7 @@ export async function updateUser(req, res) {
   const user = await getUserById(id);
   return res.json({
     status: "Ok",
-    code: "200",
+    code: 200,
     message: "",
     data: user,
   });
@@ -130,7 +130,7 @@ export async function validateUser(req, res) {
 
                 res.json({
                   status: "Ok",
-                  code: "200",
+                  code: 200,
                   message: "",
                   data,
                 });
@@ -138,7 +138,7 @@ export async function validateUser(req, res) {
             } else {
               res.json({
                 status: "Ok",
-                code: "200",
+                code: 200,
                 message: "",
                 data,
               });
