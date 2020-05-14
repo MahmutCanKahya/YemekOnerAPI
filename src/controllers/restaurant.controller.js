@@ -5,7 +5,6 @@ Restaurant.hasMany(Meal, { as: "meals", foreignKey: "restaurant_id" });
 
 export async function getAllRestaurants(req, res) {
   const a = await Restaurant.findAll({
-    include: [{ model: Meal, as: "meals" }],
   });
   res.json({
     data: a,
