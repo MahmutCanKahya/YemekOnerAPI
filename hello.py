@@ -68,7 +68,7 @@ def make_recommendation(users):
     recommend = pd.merge(recommend,dp_user[users[1]],on=['meal_id'])
     recommend = pd.merge(recommend, dp_user[users[2]], on=['meal_id'])
 
-    return recommend.mean(axis=1).sort_values(ascending = False).head(10)
+    return recommend.mean(axis=1).sort_values(ascending = False).head(20)
 
 x=list(make_recommendation(find_similar_user(model_knn,mat_meal_features,df_meal_features.index.get_loc(sys.argv[1]))).index)
 
