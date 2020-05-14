@@ -5,23 +5,26 @@ const Ratings = sequelize.define(
   "ratings",
   {
     id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
-      },
-      rating: {
-        type: Sequelize.INTEGER
-      },
-      meal_id: {
-        type: Sequelize.STRING,
-      },
-      user_id: {
-        type: Sequelize.STRING
-      }
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    rating: {
+      type: Sequelize.INTEGER,
+    },
+    meal_id: {
+      type: Sequelize.INTEGER,
+    },
+    user_id: {
+      type: Sequelize.STRING,
+    },
+    row_created_date: {
+      type: Sequelize.DATE,
+    },
   },
   {
-    timestamps: false
+    timestamps: false,
   }
 );
 

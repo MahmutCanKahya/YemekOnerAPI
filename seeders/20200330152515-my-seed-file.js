@@ -1,6 +1,6 @@
 "use strict";
 
-const ratings = [
+const ratings1 = [
   { id: 1, user_id: "-M1Wg1a0MzFRRZNU6Bz8", meal_id: 1, rating: 3 },
   { id: 2, user_id: "-M1Wg1a0MzFRRZNU6Bz8", meal_id: 2, rating: 3 },
   { id: 3, user_id: "-M1Wg1a0MzFRRZNU6Bz8", meal_id: 3, rating: 3 },
@@ -825,6 +825,14 @@ const ratings = [
   { id: 822, user_id: "-M1oa3gtlZMyZZKmUhhl", meal_id: 10, rating: 2 },
   { id: 823, user_id: "-M1oa3gtlZMyZZKmUhhl", meal_id: 50, rating: 3 },
 ];
+const ratings = ratings1.map((x) => {
+  return {
+    user_id: x.user_id,
+    meal_id: x.meal_id,
+    rating: x.rating,
+  };
+});
+console.log(ratings)
 const restaurants = [
   {
     id: 1,
@@ -947,7 +955,7 @@ const meals = [
   {
     id: 9,
     meal_name: "Sucukbol Pizza",
-    price: 25.90,
+    price: 25.9,
     restaurant_id: 9,
     meal_image:
       "https://cdn.yemeksepeti.com/ProductImages/TR_ISTANBUL/little_caesars_pizza/sucukbol2019_big.jpg",
@@ -1042,7 +1050,7 @@ const meals = [
   {
     id: 21,
     meal_name: "Çiğ Köfte (200 gr.)",
-    price: 11.50,
+    price: 11.5,
     restaurant_id: 8,
     meal_image:
       "https://cdn.yemeksepeti.com/ProductImages/TR_ISTANBUL/komageneetsizcigkofte/200gr2020_big.jpg",
@@ -1050,7 +1058,7 @@ const meals = [
   {
     id: 22,
     meal_name: "Sebzeli Pizza",
-    price:25.90,
+    price: 25.9,
     restaurant_id: 9,
     meal_image:
       "https://cdn.yemeksepeti.com/ProductImages/TR_ISTANBUL/little_caesars_pizza/sebze2019_big.jpg",
@@ -1074,7 +1082,7 @@ const meals = [
   {
     id: 25,
     meal_name: "Tavuklu Pilav",
-    price: 16.50,
+    price: 16.5,
     restaurant_id: 8,
     meal_image:
       "https://cdn.yemeksepeti.com/ProductImages/TR_ISTANBUL/komageneetsizcigkofte/tavuklupilav500gr2020_big.jpg",
@@ -1145,7 +1153,7 @@ const meals = [
   {
     id: 34,
     meal_name: "Mega Çiğ Köfte Dürüm",
-    price: 10.50,
+    price: 10.5,
     restaurant_id: 8,
     meal_image:
       "https://cdn.yemeksepeti.com/ProductImages/TR_ISTANBUL/komageneetsizcigkofte/megadurummenu2020_big.jpg",
@@ -1153,7 +1161,7 @@ const meals = [
   {
     id: 35,
     meal_name: "Margarita Pizza",
-    price: 25.90,
+    price: 25.9,
     restaurant_id: 9,
     meal_image:
       "https://cdn.yemeksepeti.com/ProductImages/TR_ISTANBUL/little_caesars_pizza/margarita2019_big.jpg",
@@ -1249,7 +1257,7 @@ const meals = [
   {
     id: 47,
     meal_name: "Dondurulmuş Etli İçli Köfte",
-    price: 9.50,
+    price: 9.5,
     restaurant_id: 8,
     meal_image:
       "https://cdn.yemeksepeti.com/ProductImages/TR_ISTANBUL/komageneetsizcigkofte/etlikizartmaikili2020_big.jpg",
@@ -1257,7 +1265,7 @@ const meals = [
   {
     id: 48,
     meal_name: "Parti Pizza",
-    price: 25.90,
+    price: 25.9,
     restaurant_id: 9,
     meal_image:
       "https://cdn.yemeksepeti.com/ProductImages/TR_ISTANBUL/little_caesars_pizza/parti2019_big.jpg",
@@ -1345,7 +1353,7 @@ const meals = [
   {
     id: 59,
     meal_name: "Supangle",
-    price: 6.50,
+    price: 6.5,
     restaurant_id: 8,
     meal_image:
       "https://cdn.yemeksepeti.com/ProductImages/TR_ISTANBUL/komageneetsizcigkofte/supangle2020_big.jpg",
@@ -1353,7 +1361,7 @@ const meals = [
   {
     id: 60,
     meal_name: "Piknik (Orta)",
-    price: 25.90,
+    price: 25.9,
     restaurant_id: 9,
     meal_image:
       "https://cdn.yemeksepeti.com/ProductImages/TR_ISTANBUL/little_caesars_pizza/piknik2019_big.jpg",
@@ -1650,10 +1658,10 @@ module.exports = {
     /*queryInterface.bul
     queryInterface.bulkInsert("ratings", );*/
 
-    return queryInterface.bulkInsert("meals", meals, {});
+    return queryInterface.bulkInsert("ratings", ratings, {});
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.bulkDelete("meals", () => {});
+    return queryInterface.bulkDelete("ratings", () => {});
   },
 };

@@ -7,21 +7,25 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
       },
       user_id: {
-        type: Sequelize.STRING
-      },
-      meal_id: {
         type: Sequelize.STRING,
       },
+      meal_id: {
+        type: Sequelize.INTEGER,
+      },
       rating: {
-        type: Sequelize.INTEGER
-      }
+        type: Sequelize.INTEGER,
+      },
+      row_created_date: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+      },
     });
   },
 
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable("ratings");
-  }
+  },
 };

@@ -26,7 +26,8 @@ const Restaurant = sequelize.define(
   },
   {
     timestamps: false
-  }
+  },
 );
+
 
 export default Restaurant;

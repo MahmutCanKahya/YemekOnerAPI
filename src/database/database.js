@@ -1,7 +1,7 @@
 import Sequelize from "sequelize";
 //mahmut7716
 const sequelize = new Sequelize("yemekoner", "admin", "774516", {
-  host: "35.228.102.158",
+  host: "localhost",
   dialect: "postgres",
   pool: {
     max: 5,

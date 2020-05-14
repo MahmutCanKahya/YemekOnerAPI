@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 import { isValidEmailAndPassword, generateToken } from "../helper";
 import User from "../models/User";
 import Meal from "../models/Meal";
+import Restaurant from "../models/Restaurant";
+import sequelize from "../database/database";
 import { getAllUsers, getUserById } from "../database/getData";
 
 export async function getUsers(req, res) {
@@ -104,27 +106,40 @@ export async function validateUser(req, res) {
     })
       .then((user) => {
         if (user) {
+          Restaurant.belongsTo(Meal, {
+            foreignKey: "id",
+            as: "meal",
+          });
+          Meal.belongsTo(Restaurant, {
+            as: "restaurant",
+            foreignKey: "restaurant_id",
+          });
+
           if (compareSync(password, user.password)) {
             const token = generateToken(user);
             let data = {
               ...user.dataValues,
               token,
             };
-            if (data.is_first_login) { //eğer ilk giriş ise 10 tane yemek önerisi yapılacak
-              Meal.findAll({ offset: Math.random() * 96, limit: 10 }).then(
-                (meals) => {
-                  data={
-                    ...data,
-                    suggest_meals:meals
-                  }
-                  res.json({
-                    status: "Ok",
-                    code: "200",
-                    message: "",
-                    data,
-                  });
-                }
-              );
+            if (data.is_first_login) {
+              //eğer ilk giriş ise 10 tane yemek önerisi yapılacak
+              Meal.findAll({
+                order: sequelize.random(),
+                limit: 10,
+                include: [{ model: Restaurant, as: "restaurant" }],
+              }).then((meals) => {
+                data = {
+                  ...data,
+                  suggest_meals: meals
+                };
+            
+                res.json({
+                  status: "Ok",
+                  code: "200",
+                  message: "",
+                  data,
+                });
+              });
             } else {
               res.json({
                 status: "Ok",
@@ -137,7 +152,7 @@ export async function validateUser(req, res) {
             res.json({
               status: "Error",
               code: "-1",
-              message: "Kullanıcı adı ve şifre eşleşmiyor.",
+              message: "Kullanıcı adı ve şifre eşleşmiyor1.",
               data: null,
             });
           }
@@ -145,16 +160,17 @@ export async function validateUser(req, res) {
           res.json({
             status: "Error",
             code: "-1",
-            message: "Kullanıcı adı ve şifre eşleşmiyor.",
+            message: "Kullanıcı adı ve şifre eşleşmiyor2.",
             data: null,
           });
         }
       })
       .catch((err) => {
+        console.log(err);
         res.json({
           status: "Error",
           code: "-1",
-          message: "Kullanıcı adı ve şifre eşleşmiyor.",
+          message: "Kullanıcı adı ve şifre eşleşmiyor3.",
           data: null,
         });
       });

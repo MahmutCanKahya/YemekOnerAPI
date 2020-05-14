@@ -1,16 +1,26 @@
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 module.exports = (req, res, next) => {
-    let loResponseModel;
-    try {
-        const token = req.headers.authorization.split(" ")[1];
+  let responseData = {
+    code: -1,
+    status: "",
+    message: "",
+    data: null,
+  };
+  const token = req.headers.authorization;
+  responseData.code = 401;
+  responseData.status = "Fail";
+  responseData.message = "Access denied. No token provided.";
+  if (!token) return res.status(401).json(responseData);
 
-        const decoded = jwt.verify(token, "secret");
-        req.userData=decoded;
-        next();
-    } catch (error) {
-        loResponseModel.status="Fail"
-        loResponseModel.message=error.message
-        loResponseModel.code=401;
-        return res.status(401).json(loResponseModel); 
-    }
-}
+  try {
+    const decoded = jwt.verify(token.split(" ")[1], "secret");
+    req.user = decoded;
+    next();
+  } catch (error) {
+    console.log(error);
+    responseData.code = 400;
+    responseData.status = "Fail";
+    responseData.message = "Invalid token.";
+    res.status(400).json(responseData);
+  }
+};

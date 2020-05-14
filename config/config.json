@@ -3,7 +3,7 @@
     "username": "admin",
     "password": "774516",
     "database": "yemekoner",
-    "host": "35.228.102.158",
+    "host": "localhost",
     "dialect": "postgres"
   }
 }
