@@ -4,7 +4,7 @@ import User from "../models/User";
 export async function saveRecommendation(req, res) {
   const { rates, user } = req.body;
   const { row_guid } = req.user;
-  const keys=Object.keys(rates)
+  const keys = Object.keys(rates);
   for (let index = 0; index < keys.length; index++) {
     const rating = await Ratings.create(
       {
@@ -17,8 +17,7 @@ export async function saveRecommendation(req, res) {
         fields: ["meal_id", "rating", "user_id", "row_created_date"],
       }
     );
-    console.log(rating)
-    
+    console.log(rating);
   }
   User.update(
     {
@@ -44,10 +43,10 @@ export async function recommendMeal(req, res) {
   var user_id = req.body.user_id;
 
   var process = spawn("python", ["hello.py", user_id]);
-
+  console.log(process);
   process.stdout.on("data", function (data) {
     let myData = data.toString();
-    console.log(data)
+    console.log(data);
     res.json({
       data,
       myData,
