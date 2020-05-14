@@ -7,6 +7,10 @@ import Restaurant from "../models/Restaurant";
 import sequelize from "../database/database";
 import { getAllUsers, getUserById } from "../database/getData";
 
+Meal.belongsTo(Restaurant, {
+  as: "restaurant",
+  foreignKey: "restaurant_id",
+});
 export async function getUsers(req, res) {
   const getUsers = await getAllUsers();
   res.json({
@@ -106,15 +110,6 @@ export async function validateUser(req, res) {
     })
       .then((user) => {
         if (user) {
-          Restaurant.belongsTo(Meal, {
-            foreignKey: "id",
-            as: "meal",
-          });
-          Meal.belongsTo(Restaurant, {
-            as: "restaurant",
-            foreignKey: "restaurant_id",
-          });
-
           if (compareSync(password, user.password)) {
             const token = generateToken(user);
             let data = {

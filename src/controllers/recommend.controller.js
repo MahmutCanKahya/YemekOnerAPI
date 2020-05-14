@@ -1,4 +1,5 @@
 import Ratings from "../models/Ratings";
+import User from "../models/User";
 
 export async function saveRecommendation(req, res) {
   const { rates, user } = req.body;
@@ -18,8 +19,23 @@ export async function saveRecommendation(req, res) {
     );
     console.log(x);
   }
-
-  res.json({});
+  User.update(
+    {
+      is_first_login: false,
+    },
+    {
+      where: {
+        row_guid,
+      },
+    }
+  ).then((resData) => {
+    res.json({
+      status:"Okey",
+      code:200,
+      data:null,
+      message:""
+    });
+  });
 }
 
 export async function recommendMeal(req, res) {
