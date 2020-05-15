@@ -50,10 +50,11 @@ export async function recommendMeal(req, res) {
   try {
     process.stdout.on("data", function (data) {
       let myData = data.toString();
+      console.log("mealid:", data.toString().substring(0, str.length - 1));
 
       Meal.findAll({
         where: {
-          id: data.toString(),
+          id: data.toString().substring(0, str.length - 1),
         },
         include: [{ model: Restaurant, as: "restaurant" }],
       }).then((meals) => {
