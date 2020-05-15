@@ -41,10 +41,7 @@ export async function saveRecommendation(req, res) {
 }
 
 export async function recommendMeal(req, res) {
-  Meal.belongsTo(Restaurant, {
-    as: "restaurant",
-    foreignKey: "restaurant_id",
-  });
+
   var spawn = require("child_process").spawn;
   var user_id = req.body.user_id;
 
