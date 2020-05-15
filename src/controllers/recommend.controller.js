@@ -49,12 +49,13 @@ export async function recommendMeal(req, res) {
   console.log(process);
   try {
     process.stdout.on("data", function (data) {
-      let myData = data.toString();
-      console.log("mealid:", data.toString().substring(0, data.toString().length - 1));
+      let parsData=data.toString().substring(1, data.toString().length - 1)
+
+      console.log(parsData.split(","))
 
       Meal.findAll({
         where: {
-          id: [1,2,3],
+          id: parsData.split(","),
         },
         include: [{ model: Restaurant, as: "restaurant" }],
       }).then((meals) => {
