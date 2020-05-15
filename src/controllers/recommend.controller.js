@@ -49,7 +49,7 @@ export async function recommendMeal(req, res) {
   console.log(process);
   try {
     process.stdout.on("data", function (data) {
-      let parsData=data.toString().substring(1, data.toString().length - 1)
+      let parsData=data.toString().substring(1, data.toString().length - 2)
 
       console.log(parsData.split(","))
 
