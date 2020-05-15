@@ -50,7 +50,7 @@ export async function recommendMeal(req, res) {
   try {
     process.stdout.on("data", function (data) {
       let myData = data.toString();
-      console.log("mealid:", data);
+      console.log("mealid:", data.toString());
 
       Meal.findAll({
         where: {
