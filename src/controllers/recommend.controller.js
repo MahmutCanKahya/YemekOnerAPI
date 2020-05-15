@@ -54,7 +54,7 @@ export async function recommendMeal(req, res) {
 
       Meal.findAll({
         where: {
-          id: data.toString().substring(0, data.toString().length - 1),
+          id: [1,2,3],
         },
         include: [{ model: Restaurant, as: "restaurant" }],
       }).then((meals) => {
