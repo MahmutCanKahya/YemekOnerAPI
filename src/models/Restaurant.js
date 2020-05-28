@@ -26,6 +26,12 @@ const Restaurant = sequelize.define(
     menu_id: {
       type: Sequelize.INTEGER,
     },
+    long:{
+      type: Sequelize.DECIMAL(10,7)
+    },
+    lat:{
+      type: Sequelize.DECIMAL(10,7)
+    }
   },
   {
     timestamps: false,

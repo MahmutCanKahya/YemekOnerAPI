@@ -5,9 +5,11 @@ import {
   getAllRestaurants,
   getRestaurantById,
   getAllRating,
+  getNearRestaurants,
 } from "../controllers/restaurant.controller";
 
 router.get("/", auth, getAllRestaurants);
+router.post("/nearRestaurants", auth, getNearRestaurants);
 router.get("/ratings", getAllRating);
 router.get("/:uid", auth, getRestaurantById);
 

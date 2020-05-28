@@ -10,7 +10,6 @@ import {
 
 router.get("/", getUsers);
 router.put("/:id", updateUser);
-
 router.post("/", signUpUser);
 router.post("/validate", validateUser);
 
